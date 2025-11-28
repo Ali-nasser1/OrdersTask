@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace OrdersTask.Application.DTOs
 {
-    internal class CreateOrderDto
+    public class CreateOrderDto
     {
+        public string CustomerName { get; set; } = string.Empty;
+        public string Product { get; set; } = string.Empty;
+        public decimal Amount { get; set; }
     }
 }

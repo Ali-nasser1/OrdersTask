@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace OrdersTask.Domain.Interfaces
 {
-    internal interface ICacheService
+    public interface ICacheService
     {
+        Task<T?> GetAsync<T>(string cacheKey);
+        Task SetAsync<T>(string cacheKey, T value, TimeSpan? ttl = null);
+        Task RemoveAsync(string cacheKey);
     }
 }

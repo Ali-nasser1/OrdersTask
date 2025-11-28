@@ -54,7 +54,7 @@ namespace OrdersTask.Application.Services
             var cacheKey = $"{CacheKeyPrefix}{orderId}";
             await _cacheService.RemoveAsync(cacheKey);
 
-            _logger.LogInformation("Order {OrderId} deleted successfully", id);
+            _logger.LogInformation("Order {OrderId} deleted successfully", orderId);
             return true;
         }
 
