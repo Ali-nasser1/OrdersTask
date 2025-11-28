@@ -4,9 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrdersTask.Domain
+namespace OrdersTask.Domain.Exceptions
 {
-    internal class ValidationException
+    public class ValidationException : Exception
     {
+        public IDictionary<string, string[]> Errors { get; }
+
+        public ValidationException(IDictionary<string, string[]> errors)
+               :base("One or more validation errors occurred")
+        {
+            Errors = errors;   
+        }
     }
 }

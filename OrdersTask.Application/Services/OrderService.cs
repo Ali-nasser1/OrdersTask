@@ -54,7 +54,7 @@ namespace OrdersTask.Application.Services
             var cacheKey = $"{CacheKeyPrefix}{orderId}";
             await _cacheService.RemoveAsync(cacheKey);
 
-            _logger.LogInformation("Order {OrderId} deleted successfully", id);
+            _logger.LogInformation("Order {OrderId} deleted successfully", orderId);
             return true;
         }
 
@@ -62,6 +62,11 @@ namespace OrdersTask.Application.Services
         {
             _logger.LogInformation("Retrieving all orders");
             var orders = await _orderRepository.GetAllAsync();
+            if(!orders.Any())
+            {
+                _logger.LogWarning("No orders exist");
+                throw new NotFoundException("No orders exist");
+            }
             return orders.Select(MapToDto);
         }
 
@@ -80,13 +85,13 @@ namespace OrdersTask.Application.Services
 
             if(order == null)
             {
-                _logger.LogWarning("Order {OrderId} not found", orderId);
+                _logger.LogWarning($"Order {orderId} not found");
                 throw new NotFoundException($"Order with ID {orderId} not found");
             }
 
             var orderDto = MapToDto(order);
 
-            await _cacheService.SetAsync(cacheKey, order, CacheTTL);
+            await _cacheService.SetAsync(cacheKey, orderDto, CacheTTL);
             _logger.LogInformation("Order {OrderId} cached for {TTL} minutes", orderId, CacheTTL.TotalMinutes);
 
             return orderDto;
