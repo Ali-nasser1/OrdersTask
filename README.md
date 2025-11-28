@@ -4,6 +4,7 @@ A RESTful API built with .NET 8, Entity Framework Core, and Redis for managing o
 
 ##  Short Questions Answers:
 1. Redis vs SQL – key differences.
+
 **Redis:**
 - In-memory key-value store
 - Extremely fast
@@ -27,6 +28,7 @@ A RESTful API built with .NET 8, Entity Framework Core, and Redis for managing o
 - make a retry or fallback mechanism
 
 4. Optimistic vs pessimistic locking? 
+
 **Optimistic locking:**
 - Allow reading and writing without a lock
 - Validate before saving data if it has changed
