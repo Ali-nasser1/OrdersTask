@@ -2,6 +2,49 @@
 
 A RESTful API built with .NET 8, Entity Framework Core, and Redis for managing orders with caching capabilities.
 
+##  Short Questions Answers:
+1. Redis vs SQL – key differences.
+**Redis:**
+- In-memory key-value store
+- Extremely fast
+- Data is temporary unless persistence is enabled
+- Best for caching, sessions, and real-time counters
+
+**SQL:**
+- Disk-based relational database
+- uses structured tables and relationships
+- Best for long-term and raliable data storage
+
+2. When not to use caching? 
+- Data is frequently changed
+- if we need real-time accuracy
+- Huge data and limited memory
+
+3. What if Redis is down? 
+- The system should instantly retrieve the data from SQL
+- No Downtime will occur, but we will find a delay in response
+- Log the error
+- make a retry or fallback mechanism
+
+4. Optimistic vs pessimistic locking? 
+**Optimistic locking:**
+- Allow reading and writing without a lock
+- Validate before saving data if it has changed
+- suitable for systems with low writes and high reads
+
+**pessimistic lock:**
+- Lock the row before Editing
+- prevent other users from editing
+- suitable for high conflicts
+
+5. Ways to scale a .NET backend? 
+- Horizontal scaling: Add more server instances behind a load balancer
+- Vertical scaling: Increase CPU, RAM, disk on existing servers
+- Database scaling: read replicas, sharding
+- caching using Redis
+- Microservices Architecture: Break monolith into smaller services
+- Queue-based processing: RabbitMQ, Kafka
+
 ##  Architecture
 
 This project follows **Clean Architecture** principles with clear separation of concerns:
